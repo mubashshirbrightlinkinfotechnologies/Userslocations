@@ -9,14 +9,29 @@ import com.example.placesapi.remote.data.CountryResponseDto
 import com.example.placesapi.remote.data.StateResponseDto
 import kotlinx.coroutines.launch
 
-class CityViewModel : ViewModel() {
+class PlacesViewModel : ViewModel() {
+    val countriesResponse = MutableLiveData<CountryResponseDto>()
+    val statesResponse = MutableLiveData<StateResponseDto>()
     val cityResponse = MutableLiveData<CityResponseDto>()
+
     private val api = RetrofitClient.getPlacesApi()
 
+    fun getCountries() {
+        viewModelScope.launch {
+            val result = api.getCountries()
+            countriesResponse.postValue(result.body())
+        }
+    }
     fun getCities(id: Int) {
         viewModelScope.launch {
             val result = api.getCities(id)
             cityResponse.postValue(result.body())
+        }
+    }
+    fun getStates(id: Int) {
+        viewModelScope.launch {
+            val result = api.getStates(id)
+            statesResponse.postValue(result.body())
         }
     }
 }

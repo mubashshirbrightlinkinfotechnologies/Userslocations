@@ -10,6 +10,12 @@
 .DS_Store
 /build
 /captures
+/caches
+/daemon
+/jdks
+/kotlin-profile
+/wrapper
+/native
 .externalNativeBuild
 .cxx
 local.properties

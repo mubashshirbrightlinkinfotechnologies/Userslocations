@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.placesapi.BottomSheetFragment
 import com.example.placesapi.databinding.ActivityMainBinding
 import com.example.placesapi.remote.RetrofitClient
 import com.example.placesapi.viewmodel.MainViewModel
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.loginResponse.observe(this) { response ->
             RetrofitClient.JWT_TOKEN = response.jwtToken ?: ""
-            val intent = Intent(this@MainActivity, CountriesActivity::class.java)
+            val intent = Intent(this@MainActivity, MapsActivity::class.java)
             startActivity(intent)
             finish()
         }

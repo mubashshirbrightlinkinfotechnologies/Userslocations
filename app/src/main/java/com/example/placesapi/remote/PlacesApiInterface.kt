@@ -2,6 +2,7 @@ package com.example.placesapi.remote
 
 import com.example.placesapi.remote.data.CityResponseDto
 import com.example.placesapi.remote.data.CountryResponseDto
+import com.example.placesapi.remote.data.MapResponseDto
 import com.example.placesapi.remote.data.StateResponseDto
 import retrofit2.Response
 import retrofit2.http.GET
@@ -21,5 +22,8 @@ interface PlacesApiInterface {
     suspend fun getCities(
         @Path("id") id: Int
     ): Response<CityResponseDto>
+
+    @GET("/user/getMap")
+    suspend fun getMaps():Response<MapResponseDto>
 
 }

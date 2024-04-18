@@ -8,7 +8,7 @@ import retrofit2.create
 
 object RetrofitClient {
     var JWT_TOKEN = ""
-    private const val BASE_URL = "http://54.88.69.223:8084/"
+    private const val BASE_URL = "http://164.52.197.27:8082/"
 
     private fun provideRetrofitClient(): Retrofit {
         return Retrofit.Builder()

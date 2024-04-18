@@ -6,13 +6,16 @@ import androidx.lifecycle.viewModelScope
 import com.example.placesapi.remote.RetrofitClient
 import com.example.placesapi.remote.data.CityResponseDto
 import com.example.placesapi.remote.data.CountryResponseDto
+import com.example.placesapi.remote.data.MapResponseDto
 import com.example.placesapi.remote.data.StateResponseDto
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class PlacesViewModel : ViewModel() {
     val countriesResponse = MutableLiveData<CountryResponseDto>()
     val statesResponse = MutableLiveData<StateResponseDto>()
     val cityResponse = MutableLiveData<CityResponseDto>()
+    val mapResponse = MutableLiveData<MapResponseDto>()
 
     private val api = RetrofitClient.getPlacesApi()
 
@@ -32,6 +35,22 @@ class PlacesViewModel : ViewModel() {
         viewModelScope.launch {
             val result = api.getStates(id)
             statesResponse.postValue(result.body())
+        }
+    }
+
+    fun getMapData() {
+        viewModelScope.launch {
+            val result = api.getMaps()
+            mapResponse.postValue(result.body())
+        }
+    }
+
+    fun keepUpdatingLocation() {
+        viewModelScope.launch {
+            while (true){
+                getMapData()
+                delay(10000L)
+            }
         }
     }
 }
